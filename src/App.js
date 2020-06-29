@@ -27,7 +27,7 @@ function App() {
 
   const onEdit = ({ id, title, editing }) => {
     const newTodos = todos.map((todo) =>
-      todo.id === id ? { ...todo, title: title, editing: editing } : todo
+      todo.id === id ? { ...todo, title, editing } : todo
     );
     setTodos(newTodos);
   };
