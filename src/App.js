@@ -12,7 +12,6 @@ function App() {
     { id: 3, title: "완료된 타이틀", done: true, editing: false },
   ]);
   const [nextId, setNextId] = useState(4);
-  const [count, setCount] = useState(3);
   const [filter, setFilter] = useState(FILTER_TYPE.ALL);
 
   const onCreate = ({ title, done, editing }) => {
@@ -24,14 +23,11 @@ function App() {
     });
     setNextId(nextId + 1);
     setTodos(newTodos);
-    setCount(count + 1);
   };
 
   const onEdit = ({ id, title, editing }) => {
     const newTodos = todos.map((todo) =>
-      todo.id === id
-        ? { id: id, title: title, done: todo.done, editing: editing }
-        : todo
+      todo.id === id ? { ...todo, title: title, editing: editing } : todo
     );
     setTodos(newTodos);
   };
@@ -39,23 +35,18 @@ function App() {
   const onDelete = (id) => {
     const newTodos = todos.filter((todo) => todo.id !== id);
     setTodos(newTodos);
-    setCount(count - 1);
   };
 
   const onCheckClick = (id) => {
     const newTodos = todos.map((todo) =>
-      todo.id === id
-        ? { id: id, title: todo.title, done: !todo.done, editing: todo.editing }
-        : todo
+      todo.id === id ? { ...todo, done: !todo.done } : todo
     );
     setTodos(newTodos);
   };
 
   const onDbClick = (id) => {
     const newTodos = todos.map((todo) =>
-      todo.id === id
-        ? { id: id, title: todo.title, done: todo.done, editing: true }
-        : todo
+      todo.id === id ? { ...todo, editing: true } : todo
     );
     setTodos(newTodos);
   };
@@ -64,18 +55,31 @@ function App() {
     setFilter(type);
   };
 
+  const filteringTodos = () => {
+    if (filter === FILTER_TYPE.ACTIVE) {
+      return todos.filter((todo) => !todo.done);
+    }
+    if (filter === FILTER_TYPE.COMPLETED) {
+      return todos.filter((todo) => todo.done);
+    }
+    return todos;
+  };
+
   return (
     <section className="todoapp">
       <TodoHeader onCreate={onCreate} />
       <TodoList
-        todos={todos}
-        filter={filter}
+        todos={filteringTodos()}
         onCheckClick={onCheckClick}
         onDelete={onDelete}
         onDbClick={onDbClick}
         onEdit={onEdit}
       />
-      <TodoFooter count={count} onFilterSelect={onFilterSelect} />
+      <TodoFooter
+        count={filteringTodos().length}
+        filter={filter}
+        onFilterSelect={onFilterSelect}
+      />
     </section>
   );
 }
