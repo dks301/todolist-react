@@ -2,10 +2,6 @@ import React from "react";
 import { FILTER_TYPE } from "../../utils/constants";
 
 const FilterAll = ({ filter, onFilterSelect }) => {
-  const onAllClick = () => {
-    onFilterSelect(FILTER_TYPE.ALL);
-  };
-
   return (
     <li>
       <a
@@ -14,8 +10,8 @@ const FilterAll = ({ filter, onFilterSelect }) => {
             ? FILTER_TYPE.ALL_SELECTED
             : FILTER_TYPE.ALL
         }
-        href="#/active"
-        onClick={onAllClick}
+        href="#/"
+        onClick={() => onFilterSelect(FILTER_TYPE.ALL)}
       >
         해야할 일
       </a>

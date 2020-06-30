@@ -9,18 +9,6 @@ const TodoItem = ({ item, onCheckClick, onDelete, onDbClick, onEdit }) => {
     ? CONDITION.COMPLETED
     : CONDITION.NONE;
 
-  const onClick = () => {
-    onCheckClick(item.id);
-  };
-
-  const onDeleteClick = () => {
-    onDelete(item.id);
-  };
-
-  const onDoubleClick = () => {
-    onDbClick(item.id);
-  };
-
   const onChange = (e) => setEditInput(e.target.value);
   const onKeyUp = (e) => {
     if (e.key === KEY_TYPE.ESC) {
@@ -46,11 +34,15 @@ const TodoItem = ({ item, onCheckClick, onDelete, onDbClick, onEdit }) => {
   return (
     <li id={item.id} className={itemCondition}>
       <div className="view">
-        <input className="toggle" type="checkbox" onClick={onClick} />
-        <label className="label" onDoubleClick={onDoubleClick}>
+        <input
+          className="toggle"
+          type="checkbox"
+          onClick={() => onCheckClick(item.id)}
+        />
+        <label className="label" onDoubleClick={() => onDbClick(item.id)}>
           {item.title}
         </label>
-        <button className="destroy" onClick={onDeleteClick}></button>
+        <button className="destroy" onClick={() => onDelete(item.id)}></button>
       </div>
       <input
         className="edit"

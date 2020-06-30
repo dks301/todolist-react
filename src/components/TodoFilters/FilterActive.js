@@ -2,10 +2,6 @@ import React from "react";
 import { FILTER_TYPE } from "../../utils/constants";
 
 const FilterActive = ({ filter, onFilterSelect }) => {
-  const onActiveClick = () => {
-    onFilterSelect(FILTER_TYPE.ACTIVE);
-  };
-
   return (
     <li>
       <a
@@ -14,8 +10,8 @@ const FilterActive = ({ filter, onFilterSelect }) => {
             ? FILTER_TYPE.ACTIVE_SELECTED
             : FILTER_TYPE.ACTIVE
         }
-        href="#/"
-        onClick={onActiveClick}
+        href="#/active"
+        onClick={() => onFilterSelect(FILTER_TYPE.ACTIVE)}
       >
         전체보기
       </a>

@@ -2,10 +2,6 @@ import React from "react";
 import { FILTER_TYPE } from "../../utils/constants";
 
 const FilterCompleted = ({ filter, onFilterSelect }) => {
-  const onCompletedClick = () => {
-    onFilterSelect(FILTER_TYPE.COMPLETED);
-  };
-
   return (
     <li>
       <a
@@ -15,7 +11,7 @@ const FilterCompleted = ({ filter, onFilterSelect }) => {
             : FILTER_TYPE.COMPLETED
         }
         href="#/completed"
-        onClick={onCompletedClick}
+        onClick={() => onFilterSelect(FILTER_TYPE.COMPLETED)}
       >
         완료한 일
       </a>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./App.css";
 import TodoHeader from "./components/TodoHeader";
 import TodoList from "./components/TodoList";
@@ -11,17 +11,17 @@ function App() {
     { id: 2, title: "완료된 타이틀", done: true, editing: true },
     { id: 3, title: "완료된 타이틀", done: true, editing: false },
   ]);
-  const [nextId, setNextId] = useState(4);
+  const nextId = useRef(4);
   const [filter, setFilter] = useState(FILTER_TYPE.ALL);
 
   const onCreate = ({ title, done, editing }) => {
     const newTodos = todos.concat({
-      id: nextId,
-      title: title,
-      done: done,
-      editing: editing,
+      id: nextId.current,
+      title,
+      done,
+      editing,
     });
-    setNextId(nextId + 1);
+    nextId.current++;
     setTodos(newTodos);
   };
 
