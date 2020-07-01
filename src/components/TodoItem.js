@@ -37,7 +37,8 @@ const TodoItem = ({ item, onCheckClick, onDelete, onDbClick, onEdit }) => {
         <input
           className="toggle"
           type="checkbox"
-          onClick={() => onCheckClick(item.id)}
+          onChange={() => onCheckClick(item.id)}
+          checked={item.done}
         />
         <label className="label" onDoubleClick={() => onDbClick(item.id)}>
           {item.title}

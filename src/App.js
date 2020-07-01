@@ -77,7 +77,7 @@ function App() {
       />
       <TodoFooter
         count={filteringTodos().length}
-        filter={filter}
+        selectedFilter={filter}
         onFilterSelect={onFilterSelect}
       />
     </section>
